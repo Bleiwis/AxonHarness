@@ -1,0 +1,36 @@
+name: Harness Engineering Verification
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  verify:
+    name: Verify Invariants & Specs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        run: |
+          chmod +x .harness/scripts/*.sh
+
+      - name: Run SDD Spec Linter
+        run: |
+          make lint-specs
+
+      - name: Run BDD Gherkin Linter
+        run: |
+          make lint-bdd
+
+      - name: Run Full Harness Verification
+        run: |
+          make verify
+
+      - name: Run Test Suite
+        run: |
+          make test

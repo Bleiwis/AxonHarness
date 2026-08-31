@@ -1,0 +1,20 @@
+# Temporary files
+.tmp/
+*.tmp
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Coverage and build artifacts (agnostic)
+coverage/
+dist/
+build/
+bin/

@@ -1,0 +1,27 @@
+version: '3'
+
+tasks:
+  default:
+    desc: List all available tasks
+    cmds:
+      - task --list
+
+  verify:
+    desc: Run full harness verification (Specs, BDD, Invariants)
+    cmds:
+      - bash .harness/scripts/verify-harness.sh
+
+  lint-specs:
+    desc: Validate SDD specifications in specs/features/
+    cmds:
+      - bash .harness/scripts/lint-specs.sh
+
+  lint-bdd:
+    desc: Validate BDD Gherkin files in specs/bdd/
+    cmds:
+      - bash .harness/scripts/lint-gherkin.sh
+
+  test:
+    desc: Run full test suite (TDD)
+    cmds:
+      - echo "🧪 Running tests (configured per runtime/language)..."

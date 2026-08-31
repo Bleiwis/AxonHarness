@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "🔍 [HOOK: pre-commit] Running Fast Spec & Gherkin Linters..."
+make lint-specs
+make lint-bdd
+echo "✅ [HOOK: pre-commit] Passed."

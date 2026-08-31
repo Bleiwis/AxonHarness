@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "🛡️  [HOOK: pre-push] Running Full Harness Verification & Tests..."
+make verify
+make test
+echo "✅ [HOOK: pre-push] Passed."
