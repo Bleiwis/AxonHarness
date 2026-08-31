@@ -33,6 +33,7 @@ When requested to build, modify, or extend any feature:
 - Review `docs/constitution.md` to ensure no invariant is violated.
 - If creating a new feature, create/update `specs/features/XXX-[feature].spec.md` using `specs/templates/spec.template.md`.
 - Explicitly define: Problem Statement, User Stories, In Scope / Out of Scope, Functional & Non-Functional Requirements, and Data Contracts.
+- Select and document the architecture archetype (Tier 1/2/3) using `.agents/rules/architecture-rules.md` and `docs/architecture/decision-matrix.md`.
 - If architectural decisions are required, propose an ADR in `docs/adr/`.
 
 ### Phase 2: Behavior Specification (BDD)
@@ -67,6 +68,7 @@ When requested to build, modify, or extend any feature:
 ## 4. Rule Index
 
 - [SDD Protocol](rules/sdd-rules.md)
+- [Architecture Selection Rules](rules/architecture-rules.md)
 - [Gherkin Expert Guide](rules/gherkin-rules.md)
 - [TDD & Testing Standards](rules/tdd-rules.md)
 - [Harness Invariants & Taste Rules](rules/harness-invariants.md)
