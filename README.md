@@ -10,19 +10,36 @@ This repository is configured with an **AI-Native Engineering Harness** that int
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Start & Installation (Plug & Play)
 
-### 1. Verification
-Run the harness verification suite to validate specifications and invariants:
+### A. Para Proyectos Existentes (NestJS, Go, Python, React, etc.)
+
+Instala AxonHarness en cualquier repositorio existente sin modificar tu código fuente:
+
 ```bash
-make verify
-# or with Task:
-task verify
+# Vía NPX (Recomendado)
+npx axon-harness init
+
+# O vía Shell script:
+./install.sh /ruta/a/tu-proyecto
 ```
 
-### 2. Available Commands
+Por defecto, se instala en modo **Isolated** (`axon_harness/`):
+- Copia `.agents/` en la raíz de tu proyecto (para que Antigravity / Cursor / Windsurf detecten el protocolo de inmediato).
+- Aísla specs, docs y ADRs en la carpeta `axon_harness/` sin ensuciar tus carpetas `src/` o `test/`.
+
+### B. Para Proyectos Nuevos (Greenfield)
+1. Clic en GitHub en **"Use this template"**
+2. O ejecuta en una carpeta vacía:
 ```bash
-make help
+npx axon-harness init --root
+```
+
+### C. Comandos de Verificación
+```bash
+make verify
+# o con Task:
+task verify
 ```
 
 ---

@@ -1,0 +1,33 @@
+{
+  "name": "axon-harness",
+  "version": "1.0.0",
+  "description": "AI-Native Engineering Harness installer for SDD, BDD, TDD and OWASP Top 10:2025 guardrails in any project.",
+  "bin": {
+    "axon-harness": "./bin/axon-harness.js"
+  },
+  "main": "./bin/axon-harness.js",
+  "files": [
+    "bin",
+    ".agents",
+    ".harness",
+    "docs",
+    "specs",
+    "install.sh"
+  ],
+  "scripts": {
+    "init": "node ./bin/axon-harness.js init"
+  },
+  "keywords": [
+    "ai",
+    "harness",
+    "antigravity",
+    "cursor",
+    "sdd",
+    "bdd",
+    "tdd",
+    "owasp",
+    "nestjs"
+  ],
+  "author": "Axon",
+  "license": "MIT"
+}
