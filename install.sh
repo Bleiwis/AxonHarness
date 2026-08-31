@@ -59,7 +59,81 @@ else
     fi
 fi
 
+# 3. Create Multi-Agent Bridge Files
+echo "🌉 [3/3] Configuring Cross-Agent Bridge Files (Cursor, Claude, Windsurf, Copilot)..."
+
+SPECS_PATH="specs/features/"
+BDD_PATH="specs/bdd/"
+CONST_PATH="docs/constitution.md"
+if [ "$MODE" != "--root" ]; then
+    SPECS_PATH="axon_harness/specs/features/"
+    BDD_PATH="axon_harness/specs/bdd/"
+    CONST_PATH="axon_harness/constitution.md"
+fi
+
+HARNESS_HEADER="<!-- AxonHarness Integration -->
+## 🛡️ Axon AI Engineering Harness Protocol
+This repository adheres to the **Axon Engineering Harness**:
+- **Master Protocol**: [.agents/AGENTS.md](.agents/AGENTS.md)
+- **Constitution**: [${CONST_PATH}](${CONST_PATH})
+- **Specifications (SDD)**: \`${SPECS_PATH}\`
+- **Behavior Specs (BDD)**: \`${BDD_PATH}\`
+- **Architecture & Invariants**: \`.agents/rules/\`
+- **OWASP Security Skills**: \`.agents/skills/owasp-*\`
+
+### Operating Rule for Agents:
+1. **SDD**: Always check or define formal requirements in \`${SPECS_PATH}\` before building.
+2. **BDD**: Write declarative \`.feature\` behavior specs in \`${BDD_PATH}\`.
+3. **TDD**: Write failing tests first (**Red**), pass with minimal code (**Green**), then **Refactor**.
+4. **OWASP Top 10:2025**: Consult \`.agents/skills/owasp-*\` for any security, auth, input, or session changes."
+
+# Root AGENTS.md
+if [ -f "$TARGET_DIR/AGENTS.md" ]; then
+    if ! grep -q "Axon Engineering Harness" "$TARGET_DIR/AGENTS.md" 2>/dev/null; then
+        echo -e "${HARNESS_HEADER}\n---\n\n$(cat "$TARGET_DIR/AGENTS.md")" > "$TARGET_DIR/AGENTS.md"
+        echo "  ✓ Linked Axon into existing root AGENTS.md"
+    fi
+else
+    echo -e "${HARNESS_HEADER}" > "$TARGET_DIR/AGENTS.md"
+    echo "  ✓ Created root AGENTS.md bridge"
+fi
+
+# Cursor (.cursorrules & .cursor/rules/axon.mdc)
+if [ ! -f "$TARGET_DIR/.cursorrules" ]; then
+    echo -e "${HARNESS_HEADER}" > "$TARGET_DIR/.cursorrules"
+    echo "  ✓ Created .cursorrules"
+fi
+mkdir -p "$TARGET_DIR/.cursor/rules"
+if [ ! -f "$TARGET_DIR/.cursor/rules/axon.mdc" ]; then
+    echo -e "---\ndescription: Axon AI Engineering Protocol, SDD, BDD, TDD and OWASP Rules\nglobs: *\n---\n\n${HARNESS_HEADER}" > "$TARGET_DIR/.cursor/rules/axon.mdc"
+    echo "  ✓ Created .cursor/rules/axon.mdc"
+fi
+
+# Claude Code (CLAUDE.md)
+if [ -f "$TARGET_DIR/CLAUDE.md" ]; then
+    if ! grep -q "Axon Engineering Harness" "$TARGET_DIR/CLAUDE.md" 2>/dev/null; then
+        echo -e "${HARNESS_HEADER}\n---\n\n$(cat "$TARGET_DIR/CLAUDE.md")" > "$TARGET_DIR/CLAUDE.md"
+        echo "  ✓ Linked Axon into existing CLAUDE.md"
+    fi
+else
+    echo -e "# CLAUDE Guidelines\n\n${HARNESS_HEADER}" > "$TARGET_DIR/CLAUDE.md"
+    echo "  ✓ Created CLAUDE.md"
+fi
+
+# Windsurf (.windsurfrules)
+if [ ! -f "$TARGET_DIR/.windsurfrules" ]; then
+    echo -e "${HARNESS_HEADER}" > "$TARGET_DIR/.windsurfrules"
+    echo "  ✓ Created .windsurfrules"
+fi
+
+# GitHub Copilot (.github/copilot-instructions.md)
+mkdir -p "$TARGET_DIR/.github"
+if [ ! -f "$TARGET_DIR/.github/copilot-instructions.md" ]; then
+    echo -e "${HARNESS_HEADER}" > "$TARGET_DIR/.github/copilot-instructions.md"
+    echo "  ✓ Created .github/copilot-instructions.md"
+fi
+
 echo ""
 echo "✅ AxonHarness successfully configured!"
-echo "🤖 Ready for AI Agent Spec-Driven & BDD workflows."
+echo "🤖 All AI Agents (Antigravity, Cursor, Claude, Windsurf, Copilot) are now locked into Axon Protocols."
 echo ""
