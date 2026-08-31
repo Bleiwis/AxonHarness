@@ -43,6 +43,10 @@ In this paradigm:
 - Verification commands (`make verify` or `task verify`) must run deterministically and provide actionable diagnostic outputs in seconds.
 - Linting, static analysis, structural architecture checks, and security audits must pass before any change is merged.
 
+### Principle 6: Security-First & OWASP Top 10:2025 Compliance
+- All generated code, database access, APIs, and infrastructure configurations must comply with the **OWASP Top 10:2025** security invariants.
+- Proactively eliminate injection vectors, enforce fail-closed authorization, isolate multi-tenant data, protect secrets, and prevent supply chain vulnerabilities.
+
 ---
 
 ## 3. Human Decision Gates

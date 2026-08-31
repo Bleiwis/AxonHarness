@@ -21,6 +21,11 @@ tasks:
     cmds:
       - bash .harness/scripts/lint-gherkin.sh
 
+  audit-security:
+    desc: Run OWASP Top 10:2025 security audit checks
+    cmds:
+      - bash .harness/scripts/audit-security.sh
+
   test:
     desc: Run full test suite (TDD)
     cmds:

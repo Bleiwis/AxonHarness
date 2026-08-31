@@ -22,6 +22,10 @@ lint-specs: ## Validate SDD specifications in specs/features/
 lint-bdd: ## Validate BDD Gherkin files in specs/bdd/
 	@bash .harness/scripts/lint-gherkin.sh
 
+.PHONY: audit-security
+audit-security: ## Run OWASP Top 10:2025 security audit checks
+	@bash .harness/scripts/audit-security.sh
+
 .PHONY: test
 test: ## Run test suite (TDD)
 	@echo "🧪 Running tests (configured per runtime/language)..."

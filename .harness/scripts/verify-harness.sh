@@ -21,7 +21,10 @@ bash .harness/scripts/lint-specs.sh
 # 3. Run Gherkin Linting (BDD)
 bash .harness/scripts/lint-gherkin.sh
 
-# 4. Check Traceability: Every Spec should have a BDD Feature
+# 4. Run OWASP Top 10:2025 Security Audit
+bash .harness/scripts/audit-security.sh
+
+# 5. Check Traceability: Every Spec should have a BDD Feature
 SPECS_DIR="specs/features"
 BDD_DIR="specs/bdd"
 

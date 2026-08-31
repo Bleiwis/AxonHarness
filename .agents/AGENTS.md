@@ -62,13 +62,29 @@ When requested to build, modify, or extend any feature:
 3. **Explicit Error Handling:** Never swallow exceptions or discard errors without context.
 4. **Deterministic Tests:** Tests must be idempotent, fast, and avoid random flakiness (no hardcoded sleeps).
 5. **Preserve Documentation Integrity:** Keep specs and code comments synchronized with code changes.
+6. **OWASP Top 10:2025 Security Compliance:** Enforce zero injection vectors, explicit access control, secret sanitization, and fail-closed handling.
 
 ---
 
-## 4. Rule Index
+## 4. Rule Index & Skills
 
+### Rules
 - [SDD Protocol](rules/sdd-rules.md)
 - [Architecture Selection Rules](rules/architecture-rules.md)
 - [Gherkin Expert Guide](rules/gherkin-rules.md)
 - [TDD & Testing Standards](rules/tdd-rules.md)
 - [Harness Invariants & Taste Rules](rules/harness-invariants.md)
+- [Security Rules (OWASP Top 10:2025)](rules/security-rules.md)
+
+### Security Skills
+- `owasp-top-10`: Master router, security audit checklist & OWASP 2025 decision framework.
+- `owasp-access-control`: A01 Broken Access Control & IDOR mitigation.
+- `owasp-security-misconfig`: A02 Security Misconfiguration & secure hardening.
+- `owasp-supply-chain`: A03 Software Supply Chain Failures & dependency integrity.
+- `owasp-crypto-secrets`: A04 Cryptographic Failures & secret management.
+- `owasp-injection-prevention`: A05 Injection Prevention (SQL, Command, NoSQL, XSS).
+- `owasp-insecure-design`: A06 Insecure Design, Threat Modeling & Rate Limiting.
+- `owasp-auth-sessions`: A07 Authentication & Session Management.
+- `owasp-integrity-failures`: A08 Software and Data Integrity Failures.
+- `owasp-logging-alerting`: A09 Security Logging & Alerting Failures.
+- `owasp-exception-handling`: A10 Mishandling of Exceptional Conditions & Fail-Closed Logic.
