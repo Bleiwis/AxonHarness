@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "AI-Native Engineering Harness installer for SDD, BDD, TDD and OWASP Top 10:2025 guardrails in any project.",
   "bin": {
-    "axon-harness": "./bin/axon-harness.js"
+    "axon-harness": "bin/axon-harness.js"
   },
   "main": "./bin/axon-harness.js",
   "files": [
