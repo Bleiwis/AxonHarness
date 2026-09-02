@@ -1,13 +1,25 @@
 {
   "name": "axon-harness",
-  "version": "1.0.1",
-  "description": "AI-Native Engineering Harness installer for SDD, BDD, TDD and OWASP Top 10:2025 guardrails in any project.",
+  "version": "1.1.0",
+  "description": "AI-Native Engineering Harness: State machine, Anti-UBB context compressor, and SDD/BDD/TDD orchestrator.",
+  "type": "module",
   "bin": {
-    "axon-harness": "bin/axon-harness.js"
+    "axon": "./bin/axon.js",
+    "axon-harness": "./bin/axon.js"
   },
-  "main": "./bin/axon-harness.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "files": [
     "bin",
+    "dist",
     ".agents",
     ".harness",
     "docs",
@@ -15,7 +27,12 @@
     "install.sh"
   ],
   "scripts": {
-    "init": "node ./bin/axon-harness.js init"
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "init": "node ./bin/axon.js init"
   },
   "keywords": [
     "ai",
@@ -25,9 +42,23 @@
     "sdd",
     "bdd",
     "tdd",
-    "owasp",
-    "nestjs"
+    "mcp",
+    "context-compressor",
+    "token-budget",
+    "state-machine"
   ],
   "author": "Axon",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.1",
+    "commander": "^12.1.0",
+    "picocolors": "^1.1.1",
+    "typescript": "^5.7.3",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.5",
+    "tsup": "^8.3.6",
+    "vitest": "^3.0.7"
+  }
 }

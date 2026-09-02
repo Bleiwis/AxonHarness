@@ -26,9 +26,13 @@ lint-bdd: ## Validate BDD Gherkin files in specs/bdd/
 audit-security: ## Run OWASP Top 10:2025 security audit checks
 	@bash .harness/scripts/audit-security.sh
 
+.PHONY: build
+build: ## Build TypeScript CLI, MCP Server, and library
+	@npm run build
+
 .PHONY: test
 test: ## Run test suite (TDD)
-	@echo "🧪 Running tests (configured per runtime/language)..."
+	@npm test
 
 .PHONY: install-hooks
 install-hooks: ## Install pre-commit and pre-push Git hooks
