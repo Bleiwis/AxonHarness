@@ -12,30 +12,128 @@ This repository is configured with an **AI-Native Engineering Harness** that int
 
 ## 🚀 Quick Start & Installation (Plug & Play)
 
-### A. For Existing Projects (NestJS, Go, Python, React, etc.)
+### 1. Installation
 
-Install AxonHarness into any existing repository without altering your source code:
+You can install `axon-harness` either as a project dependency or run it on-demand via `npx`.
 
 ```bash
-# Via NPX (Recommended)
-npx axon-harness init
+# Option A: Install as dependency in your project (Recommended)
+npm install -D axon-harness
+# or
+pnpm add -D axon-harness
+# or
+yarn add -D axon-harness
 
-# Or via Shell script:
-./install.sh /path/to/your-project
+# Option B: Global installation
+npm install -g axon-harness
 ```
 
-By default, it installs in **Isolated** mode (`axon_harness/`):
-- Copies `.agents/` to your project root (allowing Antigravity / Cursor / Windsurf to detect the protocol immediately).
-- Isolates specs, docs, and ADRs in the `axon_harness/` folder without cluttering your `src/` or `test/` directories.
+> [!IMPORTANT]
+> **Why `npx axon init` (or `npx axon-harness init`) is required:**
+> Simply adding `axon-harness` to `dependencies` or `devDependencies` only downloads the package files into `node_modules`. To activate the harness in your project, you **must run the initialization command**:
+> ```bash
+> npx axon init
+> # or (if installed locally):
+> npx axon-harness init
+> ```
+> This creates the harness directory structure (`.axon/`, `axon_harness/` or root specs/docs), sets up the state machine config, and configures agent operating rules.
 
-### B. For New Projects (Greenfield)
-1. Click **"Use this template"** on GitHub.
-2. Or run in an empty directory:
+---
+
+### 2. Initialization Modes
+
+#### A. In Existing Projects (Isolated Mode - Default)
+Preserves your existing code and test directories clean by isolating harness specs and docs under `axon_harness/`:
+
 ```bash
-npx axon-harness init --root
+# Run init with isolated structure (default)
+npx axon init
+# or explicitly:
+npx axon init --isolated
+
+# Or using the shell installer script:
+./install.sh /path/to/your-project --isolated
 ```
 
-### C. Verification Commands
+- Creates `.axon/config.json` configuring paths (`axon_harness/specs/features`, `axon_harness/specs/bdd`).
+- Copies `.agents/` to project root so Antigravity, Cursor, Claude Code, and Windsurf instantly lock into the protocol.
+- Isolates specs and documentation without altering your existing `src/` or `test/` layouts.
+
+#### B. In Greenfield / Dedicated Projects (Root Mode)
+Sets up specs and documentation directly at the root of the project:
+
+```bash
+npx axon init --root
+
+# Or using the shell installer script:
+./install.sh /path/to/your-project --root
+```
+
+---
+
+## 💻 CLI Commands Reference (`axon` / `axon-harness`)
+
+Both binary aliases are available: `axon` and `axon-harness`. If installed as a project devDependency, run them with `npx axon <command>` or `npx axon-harness <command>`.
+
+| Command | Description | Key Options / Flags |
+| :--- | :--- | :--- |
+| `axon init` | Initialize Axon Harness configuration and project state | `--isolated` (default), `--root` |
+| `axon new <feature>` | Start a new feature guided by the Axon state machine | `--spec <path>`, `--bdd <path>`, `--test <path>`, `--target <path>` |
+| `axon status` | Visual dashboard of current feature, active phase, and tracked files | _None_ |
+| `axon context` | Generate token-compressed context prompt (Anti-UBB) for AI models | `-s, --step <phase>`, `-b, --budget` |
+| `axon verify` | Run deterministic validation gates for the current active phase | _None_ |
+| `axon next` | Advance to the next lifecycle phase (validates gates automatically) | `-f, --force`, `-r, --reason <text>` |
+
+### Usage Examples & Development Lifecycle
+
+```bash
+# 1. Start a new feature (enters SDD phase and creates initial spec file)
+npx axon new user-authentication
+
+# 2. Check current status & pipeline position
+npx axon status
+
+# 3. Generate optimized AI prompt for your current phase (or pipe to clipboard)
+npx axon context
+npx axon context | pbcopy   # macOS clipboard
+
+# 4. Verify that current phase gates pass (e.g. valid spec or failing test)
+npx axon verify
+
+# 5. Advance to next phase (sdd -> bdd -> tdd_red -> tdd_green -> refactor -> verified)
+npx axon next
+
+# 6. Override or force advance if necessary
+npx axon next --force --reason "Manual spec approval"
+```
+
+---
+
+## 🤖 MCP Server (Model Context Protocol)
+
+Axon includes a built-in MCP server for direct IDE and AI agent integration (Antigravity, Claude Desktop, Cursor):
+
+```json
+{
+  "mcpServers": {
+    "axon": {
+      "command": "node",
+      "args": ["./node_modules/axon-harness/dist/mcp.js"]
+    }
+  }
+}
+```
+
+Exposed MCP Tools:
+- `axon_get_status`: Inspect current feature, phase, and tracked files.
+- `axon_get_context`: Retrieve token-compressed context prompt for any phase.
+- `axon_new_feature`: Start a feature lifecycle directly from the model.
+- `axon_verify`: Execute automated phase gates.
+- `axon_advance_phase`: Advance the state machine phase.
+
+---
+
+### 🛠️ Harness Verification Commands (Makefile / Task)
 ```bash
 make verify
 # or with Task:
